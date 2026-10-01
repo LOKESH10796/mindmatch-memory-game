@@ -131,6 +131,30 @@ function updateStars() {
 
 function winGame() {
   stopTimer();
+  
+  // Fire amazing confetti!
+  var duration = 3 * 1000;
+  var end = Date.now() + duration;
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: ['#02ccba', '#aa7ecd', '#38bdf8']
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: ['#02ccba', '#aa7ecd', '#38bdf8']
+    });
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+
   document.querySelector('.modal-background').classList.remove('hide');
   document.getElementById('modal-moves').innerHTML = moves;
   document.getElementById('modal-time').innerHTML = timerElement.innerHTML;
